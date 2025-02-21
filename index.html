@@ -2,7 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>银杏叶交互</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 确保响应式设计 -->
+    <title>Fallen Leaves</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/addons/p5.sound.min.js"></script>
 </head>
@@ -26,15 +27,13 @@
         }
 
         function setup() {
-            createCanvas(windowWidth, windowHeight);
+            createCanvas(windowWidth, windowHeight); // 初始画布大小
             setInterval(createLeaf, 500);
         }
 
         function draw() {
-            // 动态秋日背景
-            background(135, 206, 235); // 天蓝色天空
-            fill(139, 69, 19); // 棕色地面
-            rect(0, height * 0.8, width, height * 0.2);
+            // 纯色淡黄色背景
+            background(255, 245, 230); // 柔和的淡黄色
 
             // 绘制风力效果（可选：添加风的动画线条）
             if (windForce !== 0) {
@@ -97,6 +96,13 @@
             if (keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW) {
                 windForce = 0;
             }
+        }
+
+        // 优化窗口大小调整，确保响应式
+        function windowResized() {
+            resizeCanvas(windowWidth, windowHeight);
+            // 确保画布铺满页面，考虑设备像素比
+            pixelDensity(displayDensity());
         }
 
         class Leaf {
@@ -220,10 +226,6 @@
                     }
                 }
             }
-        }
-
-        function windowResized() {
-            resizeCanvas(windowWidth, windowHeight);
         }
     </script>
 </body>
